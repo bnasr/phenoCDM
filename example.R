@@ -1,9 +1,3 @@
-# phenoCDM
-Continuous development models for incremental time-series analysis: applications on leaf phenology
-
-## Example
-```{r, echo=TRUE}
-
 library(phenoCDM)
 
 ssSim <- phenoSim(nSites = 4, #number of sites
@@ -29,5 +23,3 @@ colMeans(summ$ymax)
 colMeans(summ$betas)
 colMeans(summ$tau)
 colMeans(summ$sigma)
-
-```
