@@ -41,4 +41,10 @@ colMeans(summ$betas)
 colMeans(summ$tau)
 colMeans(summ$sigma)
 
+
+boxplot(ssOut$chains[,c("beta.1", "beta.2")], outline = F)
+boxplot(ssOut$chains[,c("ymax.1", "ymax.2", "ymax.3", "ymax.4")], outline = F)
+boxplot(ssOut$chains[,c("sigma", "tau")], outline = F)
+
+
 ```
