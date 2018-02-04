@@ -39,7 +39,7 @@
 #'
 phenoSimPlot <- function(z, connect, add=F, col='blue', ylim = range(z, na.rm = T), pch=1, lwd=1){
   if(add) par(new=T)
-  plot(z, ylim=ylim, col=col, pch=pch, xlab = '', ylab = '')
+  plot(z, ylim=ylim, col=col, pch=pch, xlab = 'Index', ylab = 'Response')
   ix <- 1:length(z)
   ww1 <- which(is.na(connect[,1]))
   ww2 <- which(is.na(connect[,2]))
