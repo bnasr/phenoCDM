@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # phenoCDM
 Continuous development models for incremental time-series analysis: applications on leaf phenology
 
@@ -61,6 +66,8 @@ mtext(text = 'Index', side = 1, line = 0.5, outer = T, font = 2)
 dev.off()
 
 ```
+![Figure 1. Simulated data](fig2.png)
+
 
 
 Fitting the CDM model on the simulated data:
@@ -103,3 +110,6 @@ plotPost(chains = ssOut$chains[,c("sigma", "tau")], trueValues = c(ssSim$sig, ss
 dev.off()
 
 ```
+
+![Figure 2. Model efficiency](fig2.png)
+
