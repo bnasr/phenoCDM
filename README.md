@@ -66,7 +66,7 @@ mtext(text = 'Index', side = 1, line = 0.5, outer = T, font = 2)
 dev.off()
 
 ```
-![Figure 1. Simulated data](fig2.png)
+[Figure 1. Simulated data](fig1.png)
 
 
 
