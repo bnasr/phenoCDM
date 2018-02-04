@@ -24,6 +24,7 @@ library(phenoCDM)
 
 Simulating a dataset of three time-series:
 ```{r, echo=TRUE}
+
 ssSim <- phenoSim(nSites = 3, #number of sites
                   nTSet = 30, #number of time steps
                   beta = c(1, 2), #beta coefficients
@@ -33,6 +34,7 @@ ssSim <- phenoSim(nSites = 3, #number of sites
                   miss = 0.1, #fraction of missing data
                   ymax = c(9,5, 12) #maximum of saturation trajectory
 )
+
 ```
 
 Plotting the simulated time-series:
@@ -53,6 +55,7 @@ for(i in 1:length(ww1))  {
 mtext(text = 'Response (z)', side = 2, line = 0.5, outer = T, font = 2)
 mtext(text = 'Index', side = 1, line = 0.5, outer = T, font = 2)
 dev.off()
+
 ```
 
 
@@ -65,18 +68,19 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
                 quiet=T)
+                
 ```
 
 
 Obtaining the summarized output:
 ```{r, echo=TRUE}
+
 summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)
 colMeans(summ$tau)
 colMeans(summ$sigma)
-
 
 ```
 
@@ -92,6 +96,5 @@ plotPost(chains = ssOut$chains[,c("ymax.1", "ymax.2", "ymax.3")], trueValues = s
 plotPost(chains = ssOut$chains[,c("sigma", "tau")], trueValues = c(ssSim$sig, ssSim$tau))
 
 dev.off()
-
 
 ```
