@@ -94,5 +94,4 @@ plotPost(chains = ssOut$chains[,c("sigma", "tau")], trueValues = c(ssSim$sig, ss
 dev.off()
 
 
-
 ```
