@@ -1,6 +1,17 @@
 # phenoCDM
 Continuous development models for incremental time-series analysis: applications on leaf phenology
 
+
+
+## Installation
+The phenoCDM package can be directly installed from the Github source:
+
+```{r, echo=TRUE}
+
+install_github("bnasr/phenoCDM")
+
+```
+
 ## Example
 ```{r, echo=TRUE}
 
