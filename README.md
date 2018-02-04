@@ -32,8 +32,7 @@ ssSim <- phenoSim(nSites = 3, #number of sites
                   tau = 0.1, #observation error
                   plotFlag = F, #whether plot the data or not
                   miss = 0.1, #fraction of missing data
-                  ymax = c(9,5, 12) #maximum of saturation trajectory
-)
+                  ymax = c(9,5, 12) #maximum of saturation trajectory)
 
 ```
 
@@ -43,8 +42,11 @@ Plotting the simulated time-series:
 
 ww1 <- which(is.na( ssSim$connect[,1]))
 ww2 <- which(is.na( ssSim$connect[,2]))
+
 png('fig1.png', width = 6, height = 3, units = 'in', res = 300)
+
 par(mfrow = c(1,3), oma = c(3,2,1,1), mar=c(2,2,0,1))
+
 for(i in 1:length(ww1))  {
   z <- ssSim$z[ww1[i]:ww2[i]]
   ymax <- ssSim$ymax[i]
@@ -52,8 +54,10 @@ for(i in 1:length(ww1))  {
   mtext(paste('Set', i), side = 1, line = -2, col = 'blue', font=2)
   abline(h = ymax, col='red')
 }
+
 mtext(text = 'Response (z)', side = 2, line = 0.5, outer = T, font = 2)
 mtext(text = 'Index', side = 1, line = 0.5, outer = T, font = 2)
+
 dev.off()
 
 ```
@@ -68,7 +72,7 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
                 quiet=T)
-                
+
 ```
 
 
@@ -89,6 +93,7 @@ Comparing the model fitted parameters agaist true values:
 ```{r, echo=TRUE}
 
 png('fig2.png', width = 8, height = 3, units = 'in', res = 300)
+
 par(mfrow = c(1,3), oma = c(1,1,1,1), mar=c(2,2,0,1), font.axis=2)
 
 plotPost(chains = ssOut$chains[,c("beta.1", "beta.2")], trueValues = ssSim$beta)
