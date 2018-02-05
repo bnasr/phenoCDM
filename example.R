@@ -16,6 +16,7 @@ ww1 <- which(is.na( ssSim$connect[,1]))
 ww2 <- which(is.na( ssSim$connect[,2]))
 
 png('fig1.png', width = 6, height = 3, units = 'in', res = 300)
+
 par(mfrow = c(1,3), oma = c(4,4,4,3), mar=c(0,1,0,0))
 for(i in 1:length(ww1))  {
   z <- ssSim$z[ww1[i]:ww2[i]]
@@ -24,10 +25,12 @@ for(i in 1:length(ww1))  {
   mtext(paste('Set', i), side = 3, line = .3, col = 'blue', font=1)
   abline(h = ymax, col='red')
 }
-mtext(text = 'Response (z)', side = 2, line = 0.5, outer = T, font = 2)
-mtext(text = 'Index', side = 1, line = 0.5, outer = T, font = 2)
+
+mtext(text = 'Response (z)', side = 2, line = 2, outer = T, font = 2)
+mtext(text = 'Index', side = 1, line = 2.5, outer = T, font = 2)
 mtext('Simulated time-series data', side = 3, outer = T, line = 1.5, font = 2)
 legend('bottomright', legend = c('z', 'ymax'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
+
 dev.off()
 
 
