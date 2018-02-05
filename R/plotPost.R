@@ -21,7 +21,7 @@ plotPost <- function(chains, trueValues = NULL, outline = F){
 #middle 90% instead of middle 50%(IQR) and 1.5*IQR.
 myboxplot.stats <-  function (x, coef = NULL,
                               do.conf = TRUE, do.out =TRUE,
-                              statsParam = c(.025,.25,.5,.75,.975))
+                              statsParam = c(.005,.25,.5,.75,.995))
 {
   if(length(statsParam)!=5)
   {

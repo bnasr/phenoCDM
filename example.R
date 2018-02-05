@@ -15,11 +15,11 @@ ssSim <- phenoSim(nSites = 3, #number of sites
 ww1 <- which(is.na( ssSim$connect[,1]))
 ww2 <- which(is.na( ssSim$connect[,2]))
 png('fig1.png', width = 6, height = 3, units = 'in', res = 300)
-par(mfrow = c(1,3), oma = c(2,2,4,1), mar=c(2,2,0,1))
+par(mfrow = c(1,3), oma = c(4,4,3,3), mar=c(0,1,0,0))
 for(i in 1:length(ww1))  {
   z <- ssSim$z[ww1[i]:ww2[i]]
   ymax <- ssSim$ymax[i]
-  plot(z, xlab = 'Index', ylab = '', type = 'b', ylim = range(c(0, ymax, z), na.rm = T))
+  plot(z, xlab = 'Index', ylab = '', type = 'b', ylim = range(c(0, ymax, ssSim$z), na.rm = T), yaxt= switch(i, '1'='s', '2'='n', '3' = 'n'))
   mtext(paste('Set', i), side = 3, line = .3, col = 'blue', font=1)
   abline(h = ymax, col='red')
 }
