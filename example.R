@@ -1,13 +1,15 @@
 library(phenoCDM)
 
+set.seed(2)
+
 ssSim <- phenoSim(nSites = 3, #number of sites
                   nTSet = 30, #number of time steps
-                  beta = c(.5, 2), #beta coefficients
+                  beta = c(1, 2), #beta coefficients
                   sig = 0.01, #process error
                   tau = 0.1, #observation error
                   plotFlag = F, #whether plot the data or not
                   miss = 0.1, #portion of missing data
-                  ymax = c(9,5, 12) #maximum of saturation trajectory
+                  ymax = c(9,5, 3) #maximum of saturation trajectory
 )
 
 ww1 <- which(is.na( ssSim$connect[,1]))
@@ -27,7 +29,7 @@ mtext('Simulated time-series data', side = 3, outer = T, line = 2, font = 2)
 legend('bottomright', legend = c('z', 'ymax'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
 dev.off()
 
-ssOut <- fitCDM(x = ssSim$x, #predictors  
+ssOut <- fitCDM(x = ssSim$x, #predictors
                 nGibbs = 2000,
                 nBurnin = 1000,
                 z = ssSim$z,#response
@@ -52,6 +54,6 @@ plotPost(chains = ssOut$chains[,c("beta.1", "beta.2")], trueValues = ssSim$beta)
 plotPost(chains = ssOut$chains[,c("ymax.1", "ymax.2", "ymax.3")], trueValues = ssSim$ymax)
 plotPost(chains = ssOut$chains[,c("sigma", "tau")], trueValues = c(ssSim$sig, ssSim$tau))
 mtext('Posterior distributions of the parameters', side = 3, outer = T, line = 1, font = 2)
-legend('topright', legend = c('posterior', 'true value'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
+legend('topleft', legend = c('posterior', 'true value'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
 
 dev.off()
