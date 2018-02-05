@@ -10,7 +10,7 @@ phenoSimPlot(z, connect, add = F, col = "blue", ylim = range(z, na.rm =
 \arguments{
 \item{z}{A vector of time-series data [n x 1]}
 
-\item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains last and next element of the time-series. NA values means not connected.}
+\item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values means not connected.}
 
 \item{add}{A logical variable whether the plot should be overlaid on the current panel.}
 
@@ -38,7 +38,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
 
-ssOut <- fitCDM(x = ssSim$x, #predictors  
+ssOut <- fitCDM(x = ssSim$x, #predictors
                 nGibbs = 2000,
                 nBurnin = 1000,
                 z = ssSim$z,#response

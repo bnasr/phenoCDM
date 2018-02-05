@@ -12,7 +12,7 @@ fitCDM(x, z, connect = NULL, nGibbs = 1000, nBurnin = 1, n.adapt = 100,
 
 \item{z}{Vector of reponse values [N x 1].}
 
-\item{connect}{Connectivity matrix [N x 2].}
+\item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values means not connected.}
 
 \item{nGibbs}{Number of Gibbs itterations}
 
@@ -43,7 +43,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
 
-ssOut <- fitCDM(x = ssSim$x, #predictors  
+ssOut <- fitCDM(x = ssSim$x, #predictors
                 nGibbs = 2000,
                 nBurnin = 1000,
                 z = ssSim$z,#response
