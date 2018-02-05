@@ -1,4 +1,3 @@
-source('~/Projects/procVisData/dataViz.R')
 library(phenoCDM)
 
 set.seed(2)
@@ -71,9 +70,11 @@ R2 <- cor(na.omit(cbind(o, p)))[1,2]^2
 png('fig3.png', width = 5, height = 5, units = 'in', res = 300)
 par( mar=c(4,4,1,1), font.axis=2)
 
-plotPredVsObsGibbs(o = o , p = yGibbs, xlim = c(0,10), ylim=c(0,10))
+plotPOGibbs(o = o , p = yGibbs, xlim = c(0,10), ylim=c(0,10), cex = .7)
 mtext(paste0('R² = ', signif(R2, 3)), line = -1, cex = 2, font = 2, side = 1, adj = .9)
-legend('topleft', legend = c('posterior', 'true value'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
+legend('topleft', legend = c('predictions', '95th percentile', '1:1 line'),
+       col = c('#fb8072','#80b1d3','black'),bty = 'n', cex=1.5,
+       lty = c(NA, 1, 2), lwd =c(NA, 2, 2), pch = c(16, NA, NA))
 
 dev.off()
 
