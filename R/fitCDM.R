@@ -56,7 +56,7 @@ fitCDM <- function(x, z, connect=NULL,
     Head <- which(is.na(connect[,1]))
     Tail <- which(is.na(connect[,2]))
     Body <- which(!rowSums(is.na(connect)))
-  # }else if(!is.null(HeadTail)){
+    # }else if(!is.null(HeadTail)){
     # Head <- which(HeadTail[,1])
     # Tail <- which(HeadTail[,2])
     # Body <- which(!(HeadTail[,1]|HeadTail[,2]))
@@ -69,7 +69,7 @@ fitCDM <- function(x, z, connect=NULL,
                           {
                           for (i in 1:N)
                           {
-                          z[i] ~ dnorm(y[i], tau2)
+                            z[i] ~ dnorm(y[i], tau2)
                           }
 
                           tau2 <- pow(tau, -2)
@@ -77,28 +77,33 @@ fitCDM <- function(x, z, connect=NULL,
 
                           for (i in connectHead)
                           {
-                          y[i] ~ dnorm(0, sigma2)
+                            y[i] ~ dnorm(0, sigma2)
                           }
 
                           for (i in connectBody)
                           {
-                          dy[i] ~ dnorm(x[i-1,]%*%beta*(1-y[i-1]/ymax[blocks[i]]), sigma2)
-                          y[i] <- y[i-1] + max(0, dy[i])
+                            dy[i] ~ dnorm(x[i-1,]%*%beta*(1-y[i-1]/ymax[blocks[i]]), sigma2)
+                            y[i] <- y[i-1] + max(0, dy[i])
                           }
 
                           for (i in connectTail)
                           {
-                          dy[i] ~ dnorm(x[i-1,]%*%beta*(1 - y[i-1]/ymax[blocks[i]]), sigma2)
-                          y[i] <- y[i-1] + max(0, dy[i])
+                            dy[i] ~ dnorm(x[i-1,]%*%beta*(1 - y[i-1]/ymax[blocks[i]]), sigma2)
+                            y[i] <- y[i-1] + max(0, dy[i])
                           }
 
                           for (i in 1:nblocks)
                           {
-                          ymax[i] ~ dnorm(0, .001)T(0,10000)
+                            ymax[i] ~ dnorm(0, .001)T(0,10000)
                           }
                           for (i in 1:p)
                           {
-                          beta[i] ~ dnorm(0, .0001)
+                            beta[i] ~ dnorm(0, .0001)
+                          }
+
+                          for (i in 1:N)
+                          {
+                            zpred[i] ~ dnorm(y[i], tau2)
                           }
 
                           sigma2 <- pow(sigma, -2)
@@ -121,7 +126,7 @@ fitCDM <- function(x, z, connect=NULL,
 
   update(ssModel, nBurnin)
 
-  ssSamples <- jags.samples(ssModel,c('y','beta', 'sigma', 'tau', 'ymax'), nGibbs )
+  ssSamples <- jags.samples(ssModel,c('y','beta', 'sigma', 'tau', 'ymax', 'zpred'), nGibbs )
 
 
   # print(ssSamples)
@@ -134,6 +139,8 @@ fitCDM <- function(x, z, connect=NULL,
   )
   latentGibbs <- NULL
   if(calcLatentGibbs) latentGibbs <- t(apply(ssSamples$y, c(1,2), mean))
+  zpred <- t(apply(ssSamples$zpred, c(1,2), mean))
+
   ww <- grep(pattern = 'beta', colnames(ssGibbs.jags))
   if(!is.null(colnames(x))) colnames(ssGibbs.jags)[ww] <- colnames(x)
   return(list(model=ssModel,
@@ -141,6 +148,7 @@ fitCDM <- function(x, z, connect=NULL,
               nBurnin= nBurnin,
               nGibbs=nGibbs,
               latentGibbs = latentGibbs,
+              zpred = zpred,
               rawsamples = ssSamples,
               data =list(x = x,
                          z = z,

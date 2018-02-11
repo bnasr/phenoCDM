@@ -35,11 +35,12 @@ set.seed(2)
 ssSim <- phenoSim(nSites = 3, #number of sites
                   nTSet = 30, #number of time steps
                   beta = c(1, 2), #beta coefficients
-                  sig = 0.01, #process error
-                  tau = 0.1, #observation error
+                  sig = 0.05, #process error
+                  tau = 0.25, #observation error
                   plotFlag = F, #whether plot the data or not
                   miss = 0.1, #portion of missing data
-                  ymax = c(9,5, 3) #maximum of saturation trajectory)
+                  ymax = c(9,5, 3) #maximum of saturation trajectory
+)
 
 
 ```
@@ -128,21 +129,24 @@ dev.off()
 Comparing the model fitted parameters agaist true values:
 ```{r, echo=TRUE}
 
-yGibbs <- t(apply(ssOut$rawsamples$y, 1:2, mean))
+
+yGibbs <- ssOut$latentGibbs
+zGibbs <- ssOut$zpred
 o <- ssOut$data$z
 p <- apply(ssOut$rawsamples$y, 1, mean)
 R2 <- cor(na.omit(cbind(o, p)))[1,2]^2
 
-
 png('fig3.png', width = 5, height = 5, units = 'in', res = 300)
 par( mar=c(4,4,1,1), font.axis=2)
-
-plotPOGibbs(o = o , p = yGibbs, xlim = c(0,10), ylim=c(0,10), cex = .7)
+plotPOGibbs(o = o , p = zGibbs,
+            xlim = c(0,10), ylim=c(0,10),
+            cex = .7, nburnin = 1000)
+points(o, p, pch = 3)
 mtext(paste0('R² = ', signif(R2, 3)), line = -1, cex = 2, font = 2, side = 1, adj = .9)
-legend('topleft', legend = c('predictions', '95th percentile', '1:1 line'),
-       col = c('#fb8072','#80b1d3','black'),bty = 'n', cex=1.5,
-       lty = c(NA, 1, 2), lwd =c(NA, 2, 2), pch = c(16, NA, NA))
-
+legend('topleft', legend = c('mean', '95th percentile', '1:1 line', 'latent states'),
+       col = c('#fb8072','#80b1d3','black', 'black'),
+       bty = 'n', cex=1.5,
+       lty = c(NA, 1, 2, NA), lwd =c(NA, 2, 2, 2), pch = c(16, NA, NA, 3))
 dev.off()
 
 

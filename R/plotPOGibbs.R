@@ -9,9 +9,14 @@
 #'
 #' #Plot Observed vs Predicted
 #'
-plotPOGibbs <- function(o,p,xlim=range(o, na.rm=T),ylim=range(p,na.rm=T),xlab='Observed',ylab='Predicted',
+plotPOGibbs <- function(o,p, nburnin = NULL,
+                        xlim=range(o, na.rm=T),
+                        ylim=range(p,na.rm=T),
+                        xlab='Observed',
+                        ylab='Predicted',
                                colSet= c('#fb8072','#80b1d3','black'), cex=1, lwd=2, pch=19){
   if(length(lwd)==1) lwd=rep(lwd,2)
+  if(!is.null(nburnin)) p <- p[-(1:nburnin),]
   #o  - length n vector of obs or true values
   #p - ng by n matrix of estimates
 

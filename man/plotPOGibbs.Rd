@@ -4,9 +4,9 @@
 \alias{plotPOGibbs}
 \title{Plot Observed vs Predicted}
 \usage{
-plotPOGibbs(o, p, xlim = range(o, na.rm = T), ylim = range(p, na.rm = T),
-  xlab = "Observed", ylab = "Predicted", colSet = c("#fb8072", "#80b1d3",
-  "black"), cex = 1, lwd = 2, pch = 19)
+plotPOGibbs(o, p, nburnin = NULL, xlim = range(o, na.rm = T),
+  ylim = range(p, na.rm = T), xlab = "Observed", ylab = "Predicted",
+  colSet = c("#fb8072", "#80b1d3", "black"), cex = 1, lwd = 2, pch = 19)
 }
 \arguments{
 \item{o}{Observed vector}

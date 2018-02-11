@@ -3,7 +3,7 @@ Title: Continuous development models for incremental time-series analysis: appli
 Version: 0.0.0.9000
 Authors@R: person("Bijan", "Seyednasrollah", email = "bijan.s.nasr@gmail.com", role = c("aut", "cre"))
 Description: Modeling incremental time-series data using a Bayesian state-space framework. 
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.0.0)
 License: MIT License
 Encoding: UTF-8
 LazyData: true
