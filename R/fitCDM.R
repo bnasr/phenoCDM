@@ -10,6 +10,7 @@
 #' @param n.chains Number of Gibbs sampling chains
 #' @param quiet whether to report the progress
 #' @param calcLatentGibbs Whether to calculate the latent states
+#' @param trend -1:decreasing, +1:increasing, 0: not constrained
 #' @keywords  CDM Model Fit
 #' @export
 #' @examples
@@ -47,10 +48,21 @@ fitCDM <- function(x, z, connect=NULL,
                    n.adapt=100,
                    n.chains=4,
                    quiet=F,
-                   calcLatentGibbs=F
+                   calcLatentGibbs=F,
+                   trend = +1 # -1:decreasing, +1:increasing, 0: not constrained
 
 ){
   require(rjags)
+
+  if(trend==-1)
+    t <- c(1, 0, 0)
+  else if(trend==0)
+    t <- c(0, 1, 0)
+  else if(trend==1)
+    t <- c(0, 0, 1)
+  else
+    stop('trend should be -1:decreasing, 0: not constrained or +1:increasing')
+
 
   if(!is.null(connect)){
     Head <- which(is.na(connect[,1]))
@@ -83,13 +95,13 @@ fitCDM <- function(x, z, connect=NULL,
                           for (i in connectBody)
                           {
                             dy[i] ~ dnorm(x[i-1,]%*%beta*(1-y[i-1]/ymax[blocks[i]]), sigma2)
-                            y[i] <- y[i-1] + max(0, dy[i])
+                            y[i] <- y[i-1] + t[1]*min(0, dy[i]) + t[2]*dy[i] + t[3]*max(0, dy[i])
                           }
 
                           for (i in connectTail)
                           {
                             dy[i] ~ dnorm(x[i-1,]%*%beta*(1 - y[i-1]/ymax[blocks[i]]), sigma2)
-                            y[i] <- y[i-1] + max(0, dy[i])
+                            y[i] <- y[i-1] + t[1]*min(0, dy[i]) + t[2]*dy[i] + t[3]*max(0, dy[i])
                           }
 
                           for (i in 1:nblocks)
@@ -114,6 +126,7 @@ fitCDM <- function(x, z, connect=NULL,
                         quiet = quiet,
                         data = list('x' = x,
                                     'z' = z,
+                                    't' = t,
                                     'N' = nrow(x),
                                     'p'= ncol(x),
                                     'blocks'=cumsum(is.na(connect[,1])*1),

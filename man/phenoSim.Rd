@@ -5,7 +5,7 @@
 \title{Simulate Green-up Phenology Data}
 \usage{
 phenoSim(nSites = 1000, nTSet = c(3:6), p = 2, beta = NULL, sig = 0.1,
-  tau = 0.01, miss = 0, plotFlag = F, ymax = 1)
+  tau = 0.01, miss = 0, plotFlag = F, ymax = 1, trend = +1)
 }
 \arguments{
 \item{nSites}{Number of sites/seasons}
@@ -25,6 +25,8 @@ phenoSim(nSites = 1000, nTSet = c(3:6), p = 2, beta = NULL, sig = 0.1,
 \item{plotFlag}{Whether to plot the resulted time-series.}
 
 \item{ymax}{Asymptotic maximum values.}
+
+\item{trend}{-1:decreasing, +1:increasing, 0: not constrained}
 }
 \description{
 This function return a set of simulated data for multiple green-up phenology time-series.
@@ -42,7 +44,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
 
-ssOut <- fitCDM(x = ssSim$x, #predictors  
+ssOut <- fitCDM(x = ssSim$x, #predictors
                 nGibbs = 2000,
                 nBurnin = 1000,
                 z = ssSim$z,#response

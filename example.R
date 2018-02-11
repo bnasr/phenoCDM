@@ -7,9 +7,10 @@ ssSim <- phenoSim(nSites = 3, #number of sites
                   beta = c(1, 2), #beta coefficients
                   sig = 0.05, #process error
                   tau = 0.25, #observation error
-                  plotFlag = F, #whether plot the data or not
+                  plotFlag = T, #whether plot the data or not
                   miss = 0.1, #portion of missing data
-                  ymax = c(9,5, 3) #maximum of saturation trajectory
+                  ymax = c(9,5, 3), #maximum of saturation trajectory
+                  trend = 1
 )
 
 ww1 <- which(is.na( ssSim$connect[,1]))
@@ -21,7 +22,7 @@ par(mfrow = c(1,3), oma = c(4,4,4,3), mar=c(0,1,0,0))
 for(i in 1:length(ww1))  {
   z <- ssSim$z[ww1[i]:ww2[i]]
   ymax <- ssSim$ymax[i]
-  plot(z, xlab = 'Index', ylab = '', type = 'b', ylim = range(c(0, ymax, ssSim$z), na.rm = T), yaxt= switch(i, '1'='s', '2'='n', '3' = 'n'))
+  plot(z, xlab = 'Index', ylab = '', type = 'b', ylim = range(c(0, ssSim$ymax, ssSim$z), na.rm = T), yaxt= switch(i, '1'='s', '2'='n', '3' = 'n'))
   mtext(paste('Set', i), side = 3, line = .3, col = 'blue', font=1)
   abline(h = ymax, col='red')
 }
@@ -41,7 +42,7 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
                 quiet=T,
-                calcLatentGibbs = T)
+                calcLatentGibbs = T, trend = ssSim$trend)
 
 summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
 

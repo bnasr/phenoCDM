@@ -5,7 +5,7 @@
 \title{Fit a CDM Model}
 \usage{
 fitCDM(x, z, connect = NULL, nGibbs = 1000, nBurnin = 1, n.adapt = 100,
-  n.chains = 4, quiet = F, calcLatentGibbs = F)
+  n.chains = 4, quiet = F, calcLatentGibbs = F, trend = +1)
 }
 \arguments{
 \item{x}{Matrix of predictors [N x p].}
@@ -25,6 +25,8 @@ fitCDM(x, z, connect = NULL, nGibbs = 1000, nBurnin = 1, n.adapt = 100,
 \item{quiet}{whether to report the progress}
 
 \item{calcLatentGibbs}{Whether to calculate the latent states}
+
+\item{trend}{-1:decreasing, +1:increasing, 0: not constrained}
 }
 \description{
 This function fits a CDM model on the input data as it is described by the phenoSim function.
