@@ -1,13 +1,14 @@
 Package: phenoCDM
-Title: Continuous development models for incremental time-series analysis: applications on leaf phenology
-Version: 0.0.0.9000
+Title: Continuous Development Models for Incremental Time-Series Analysis: Applications on Leaf Phenology
+Version: 0.0.9
 Authors@R: person("Bijan", "Seyednasrollah", email = "bijan.s.nasr@gmail.com", role = c("aut", "cre"))
+Author: Bijan Seyednasrollah [aut, cre]
+Maintainer: Bijan Seyednasrollah <bijan.s.nasr@gmail.com>
 Description: Modeling incremental time-series data using a Bayesian state-space framework. 
-Depends: R (>= 3.0.0)
-License: MIT License
+Depends:
+    rjags
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
-Suggests:
-    rjag
 BugReports: https://github.com/bnasr/phenoCDM/issues

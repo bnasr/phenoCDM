@@ -4,14 +4,32 @@
 \alias{plotPOGibbs}
 \title{Plot Observed vs Predicted}
 \usage{
-plotPOGibbs(o, p, nburnin = NULL, xlim = range(o, na.rm = T),
-  ylim = range(p, na.rm = T), xlab = "Observed", ylab = "Predicted",
+plotPOGibbs(o, p, nburnin = NULL, xlim = range(o, na.rm = TRUE),
+  ylim = range(p, na.rm = TRUE), xlab = "Observed", ylab = "Predicted",
   colSet = c("#fb8072", "#80b1d3", "black"), cex = 1, lwd = 2, pch = 19)
 }
 \arguments{
 \item{o}{Observed vector}
 
 \item{p}{Predicted Gibbs samples}
+
+\item{nburnin}{numbe of burn-in itterations}
+
+\item{xlim}{x-axis range}
+
+\item{ylim}{y-axis range}
+
+\item{xlab}{x-axis label}
+
+\item{ylab}{y-axis label}
+
+\item{colSet}{vector of colors for points, bars and the 1:1 line}
+
+\item{cex}{cex value for size}
+
+\item{lwd}{line width}
+
+\item{pch}{pch value for symbols}
 }
 \description{
 This function plot posterior distributions of the parameters.

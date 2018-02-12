@@ -4,21 +4,21 @@
 \alias{phenoSimPlot}
 \title{Plot Simulated Phenology Data}
 \usage{
-phenoSimPlot(z, connect, add = F, col = "blue", ylim = range(z, na.rm =
-  T), pch = 1, lwd = 1)
+phenoSimPlot(z, connect, add = FALSE, col = "blue", ylim = range(z, na.rm
+  = TRUE), pch = 1, lwd = 1)
 }
 \arguments{
 \item{z}{A vector of time-series data [n x 1]}
 
 \item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values means not connected.}
 
-\item{add}{A logical variable whether the plot should be overlaid on the current panel.}
+\item{add}{logical value indicating whether the plot should be overlaid on the current panel.}
 
-\item{col}{The color variable}
+\item{col}{The color variable as charachter}
 
 \item{ylim}{Range of the y axis}
 
-\item{pch}{pch value for the points}
+\item{pch}{pch value for the symbols}
 
 \item{lwd}{lwd value for line tickness}
 }
@@ -33,7 +33,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   beta = c(1, 2), #beta coefficients
                   sig = .01, #process error
                   tau = .2, #observation error
-                  plotFlag = T, #whether plot the data or not
+                  plotFlag = TRUE, #whether plot the data or not
                   miss = 0.1, #fraction of missing data
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
@@ -43,9 +43,9 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 nBurnin = 1000,
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
-                quiet=T)
+                quiet=TRUE)
 
-summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)

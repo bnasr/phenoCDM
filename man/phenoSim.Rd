@@ -5,14 +5,14 @@
 \title{Simulate Green-up Phenology Data}
 \usage{
 phenoSim(nSites = 1000, nTSet = c(3:6), p = 2, beta = NULL, sig = 0.1,
-  tau = 0.01, miss = 0, plotFlag = F, ymax = 1, trend = +1)
+  tau = 0.01, miss = 0, plotFlag = FALSE, ymax = 1, trend = +1)
 }
 \arguments{
 \item{nSites}{Number of sites/seasons}
 
 \item{nTSet}{A vector of integer values. Length of each time-series will be randomly sampled from this vector.}
 
-\item{p}{Number of predictors in th emodel.}
+\item{p}{Number of predictors in the model.}
 
 \item{beta}{Beta coefficients}
 
@@ -22,11 +22,11 @@ phenoSim(nSites = 1000, nTSet = c(3:6), p = 2, beta = NULL, sig = 0.1,
 
 \item{miss}{Fraction of missing data.}
 
-\item{plotFlag}{Whether to plot the resulted time-series.}
+\item{plotFlag}{logical value indicating whether to plot the resulted time-series.}
 
 \item{ymax}{Asymptotic maximum values.}
 
-\item{trend}{-1:decreasing, +1:increasing, 0: not constrained}
+\item{trend}{time-series expected trend as -1:decreasing, +1:increasing, 0: not constrained}
 }
 \description{
 This function return a set of simulated data for multiple green-up phenology time-series.
@@ -39,7 +39,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   beta = c(1, 2), #beta coefficients
                   sig = .01, #process error
                   tau = .2, #observation error
-                  plotFlag = T, #whether plot the data or not
+                  plotFlag = TRUE, #whether plot the data or not
                   miss = 0.1, #fraction of missing data
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
@@ -49,9 +49,9 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 nBurnin = 1000,
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
-                quiet=T)
+                quiet=TRUE)
 
-summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)

@@ -3,14 +3,17 @@
 #' This function plot posterior distributions of the parameters.
 #' @param chains Gibbs sampling chains
 #' @param trueValues numeric vector of true values
+#' @param outline logical value whether showing outliers
 #' @keywords  Plot Posterior Distributions
 #' @export
+#' @import graphics
+#' @import stats
 #' @examples
 #'
 #' #Summarize CDM Model Ouput
 #'
-plotPost <- function(chains, trueValues = NULL, outline = F){
-  myboxplot(chains, outline = outline, ylim = range(range(chains, na.rm = T), trueValues, na.rm = T), statsParam = c(.005,.25,.5,.75,.995))
+plotPost <- function(chains, trueValues = NULL, outline = FALSE){
+  myboxplot(chains, outline = outline, ylim = range(range(chains, na.rm = TRUE), trueValues, na.rm = TRUE), statsParam = c(.005,.25,.5,.75,.995))
   if(!is.null(trueValues)){
     xs <- 1:length(trueValues)
     segments(x0 = xs - 0.35, y0 = trueValues, x1 = xs + 0.35, y1 = trueValues, col = 'red', lwd=2)

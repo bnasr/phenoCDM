@@ -3,14 +3,14 @@
 #' This function return a set of simulated data for multiple green-up phenology time-series.
 #' @param nSites Number of sites/seasons
 #' @param nTSet A vector of integer values. Length of each time-series will be randomly sampled from this vector.
-#' @param p Number of predictors in th emodel.
+#' @param p Number of predictors in the model.
 #' @param beta Beta coefficients
 #' @param sig Process error.
 #' @param tau Observation error.
 #' @param miss Fraction of missing data.
-#' @param plotFlag Whether to plot the resulted time-series.
+#' @param plotFlag logical value indicating whether to plot the resulted time-series.
 #' @param ymax Asymptotic maximum values.
-#' @param trend -1:decreasing, +1:increasing, 0: not constrained
+#' @param trend time-series expected trend as -1:decreasing, +1:increasing, 0: not constrained
 #' @keywords  Simulate Phenology Data
 #' @export
 #' @examples
@@ -21,7 +21,7 @@
 #'                   beta = c(1, 2), #beta coefficients
 #'                   sig = .01, #process error
 #'                   tau = .2, #observation error
-#'                   plotFlag = T, #whether plot the data or not
+#'                   plotFlag = TRUE, #whether plot the data or not
 #'                   miss = 0.1, #fraction of missing data
 #'                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 #' )
@@ -31,9 +31,9 @@
 #'                 nBurnin = 1000,
 #'                 z = ssSim$z,#response
 #'                 connect = ssSim$connect, #connectivity of time data
-#'                 quiet=T)
+#'                 quiet=TRUE)
 #'
-#' summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+#' summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 #'
 #' colMeans(summ$ymax)
 #' colMeans(summ$betas)
@@ -47,7 +47,7 @@ phenoSim <- function(nSites=1000,
                      sig= .1,
                      tau=.01,
                      miss=0,
-                     plotFlag = F,
+                     plotFlag = FALSE,
                      ymax=1,
                      trend = +1 # -1:decreasing, +1:increasing, 0: not constrained
 ){
@@ -60,9 +60,9 @@ phenoSim <- function(nSites=1000,
   else
     stop('trend should be -1:decreasing, 0: not constrained or +1:increasing')
 
-  nSamples.Site <- sample(nTSet, nSites, replace = T)
+  nSamples.Site <- sample(nTSet, nSites, replace = TRUE)
 
-  if(length(nTSet)==1) nSamples.Site <- sample(c(nTSet, nTSet), nSites, replace = T)
+  if(length(nTSet)==1) nSamples.Site <- sample(c(nTSet, nTSet), nSites, replace = TRUE)
 
   if(length(ymax)==1) ymax <- rep(ymax, nSites)
 

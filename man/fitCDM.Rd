@@ -5,28 +5,28 @@
 \title{Fit a CDM Model}
 \usage{
 fitCDM(x, z, connect = NULL, nGibbs = 1000, nBurnin = 1, n.adapt = 100,
-  n.chains = 4, quiet = F, calcLatentGibbs = F, trend = +1)
+  n.chains = 4, quiet = FALSE, calcLatentGibbs = FALSE, trend = +1)
 }
 \arguments{
 \item{x}{Matrix of predictors [N x p].}
 
-\item{z}{Vector of reponse values [N x 1].}
+\item{z}{Vector of response values [N x 1].}
 
-\item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values means not connected.}
+\item{connect}{The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values indicate not connected.}
 
-\item{nGibbs}{Number of Gibbs itterations}
+\item{nGibbs}{Number of MCMC itterations}
 
 \item{nBurnin}{Number of burn-in itterations.}
 
 \item{n.adapt}{Number of itterations for adaptive sampling}
 
-\item{n.chains}{Number of Gibbs sampling chains}
+\item{n.chains}{Number of MCMC chains}
 
-\item{quiet}{whether to report the progress}
+\item{quiet}{logical value indicating whether to report the progress}
 
-\item{calcLatentGibbs}{Whether to calculate the latent states}
+\item{calcLatentGibbs}{logical value indicating whether to calculate the latent states}
 
-\item{trend}{-1:decreasing, +1:increasing, 0: not constrained}
+\item{trend}{time-series expected trend as -1:decreasing, +1:increasing, 0: not constrained}
 }
 \description{
 This function fits a CDM model on the input data as it is described by the phenoSim function.
@@ -40,7 +40,7 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   beta = c(1, 2), #beta coefficients
                   sig = .01, #process error
                   tau = .2, #observation error
-                  plotFlag = T, #whether plot the data or not
+                  plotFlag = TRUE, #whether plot the data or not
                   miss = 0.1, #fraction of missing data
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
@@ -50,9 +50,9 @@ ssOut <- fitCDM(x = ssSim$x, #predictors
                 nBurnin = 1000,
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
-                quiet=T)
+                quiet=TRUE)
 
-summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)

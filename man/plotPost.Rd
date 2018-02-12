@@ -4,12 +4,14 @@
 \alias{plotPost}
 \title{Plot Posterior Distributions}
 \usage{
-plotPost(chains, trueValues = NULL, outline = F)
+plotPost(chains, trueValues = NULL, outline = FALSE)
 }
 \arguments{
 \item{chains}{Gibbs sampling chains}
 
 \item{trueValues}{numeric vector of true values}
+
+\item{outline}{logical value whether showing outliers}
 }
 \description{
 This function plot posterior distributions of the parameters.

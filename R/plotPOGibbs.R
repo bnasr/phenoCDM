@@ -3,18 +3,34 @@
 #' This function plot posterior distributions of the parameters.
 #' @param o Observed vector
 #' @param p Predicted Gibbs samples
+#' @param nburnin numbe of burn-in itterations
+#' @param xlim x-axis range
+#' @param ylim y-axis range
+#' @param xlab x-axis label
+#' @param ylab y-axis label
+#' @param colSet vector of colors for points, bars and the 1:1 line
+#' @param cex cex value for size
+#' @param lwd line width
+#' @param pch pch value for symbols
 #' @keywords  Plot Observed vs Predicted
 #' @export
+#' @import graphics
+#' @import stats
 #' @examples
 #'
 #' #Plot Observed vs Predicted
 #'
-plotPOGibbs <- function(o,p, nburnin = NULL,
-                        xlim=range(o, na.rm=T),
-                        ylim=range(p,na.rm=T),
+plotPOGibbs <- function(o,
+                        p,
+                        nburnin = NULL,
+                        xlim =range(o, na.rm=TRUE),
+                        ylim=range(p,na.rm=TRUE),
                         xlab='Observed',
                         ylab='Predicted',
-                               colSet= c('#fb8072','#80b1d3','black'), cex=1, lwd=2, pch=19){
+                        colSet= c('#fb8072','#80b1d3','black'),
+                        cex=1,
+                        lwd=2,
+                        pch=19){
   if(length(lwd)==1) lwd=rep(lwd,2)
   if(!is.null(nburnin)) p <- p[-(1:nburnin),]
   #o  - length n vector of obs or true values

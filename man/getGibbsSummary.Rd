@@ -4,16 +4,17 @@
 \alias{getGibbsSummary}
 \title{Summarize Output of the CDM Model}
 \usage{
-getGibbsSummary(ssOut, burnin = NULL, colNames = NULL, sigmaPerSeason = T)
+getGibbsSummary(ssOut, burnin = NULL, colNames = NULL,
+  sigmaPerSeason = TRUE)
 }
 \arguments{
 \item{ssOut}{CDM output list.}
 
-\item{burnin}{Number of burning .}
+\item{burnin}{Number of burnin itterations .}
 
-\item{colNames}{Name of each variable in the output.}
+\item{colNames}{vector of charachters includes names of each variable in the output.}
 
-\item{sigmaPerSeason}{whether each site/season has a separate process error}
+\item{sigmaPerSeason}{logical value indicating whether each site/season has a separate process error}
 }
 \description{
 This function return a summary of the output from the Gibbs-Sampling of the CDM model.
@@ -26,19 +27,19 @@ ssSim <- phenoSim(nSites = 4, #number of sites
                   beta = c(1, 2), #beta coefficients
                   sig = .01, #process error
                   tau = .2, #observation error
-                  plotFlag = T, #whether plot the data or not
+                  plotFlag = TRUE, #whether plot the data or not
                   miss = 0.1, #fraction of missing data
                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 )
 
-ssOut <- fitCDM(x = ssSim$x, #predictors  
+ssOut <- fitCDM(x = ssSim$x, #predictors
                 nGibbs = 2000,
                 nBurnin = 1000,
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
-                quiet=T)
+                quiet=TRUE)
 
-summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)

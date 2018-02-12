@@ -2,17 +2,18 @@
 #'
 #' This function fits a CDM model on the input data as it is described by the phenoSim function.
 #' @param x Matrix of predictors [N x p].
-#' @param z Vector of reponse values [N x 1].
-#' @param connect The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values means not connected.
-#' @param nGibbs Number of Gibbs itterations
+#' @param z Vector of response values [N x 1].
+#' @param connect The connectivity matrix for the z vector [n x 2]. Each row contains the last and next elements of the time-series. NA values indicate not connected.
+#' @param nGibbs Number of MCMC itterations
 #' @param nBurnin Number of burn-in itterations.
 #' @param n.adapt Number of itterations for adaptive sampling
-#' @param n.chains Number of Gibbs sampling chains
-#' @param quiet whether to report the progress
-#' @param calcLatentGibbs Whether to calculate the latent states
-#' @param trend -1:decreasing, +1:increasing, 0: not constrained
+#' @param n.chains Number of MCMC chains
+#' @param quiet logical value indicating whether to report the progress
+#' @param calcLatentGibbs logical value indicating whether to calculate the latent states
+#' @param trend time-series expected trend as -1:decreasing, +1:increasing, 0: not constrained
 #' @keywords  CDM Model Fit
 #' @export
+#' @import rjags
 #' @examples
 #'
 #' #Summarize CDM Model Ouput
@@ -22,7 +23,7 @@
 #'                   beta = c(1, 2), #beta coefficients
 #'                   sig = .01, #process error
 #'                   tau = .2, #observation error
-#'                   plotFlag = T, #whether plot the data or not
+#'                   plotFlag = TRUE, #whether plot the data or not
 #'                   miss = 0.1, #fraction of missing data
 #'                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
 #' )
@@ -32,9 +33,9 @@
 #'                 nBurnin = 1000,
 #'                 z = ssSim$z,#response
 #'                 connect = ssSim$connect, #connectivity of time data
-#'                 quiet=T)
+#'                 quiet=TRUE)
 #'
-#' summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = F)
+#' summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
 #'
 #' colMeans(summ$ymax)
 #' colMeans(summ$betas)
@@ -47,13 +48,11 @@ fitCDM <- function(x, z, connect=NULL,
                    nBurnin = 1,
                    n.adapt=100,
                    n.chains=4,
-                   quiet=F,
-                   calcLatentGibbs=F,
+                   quiet=FALSE,
+                   calcLatentGibbs=FALSE,
                    trend = +1 # -1:decreasing, +1:increasing, 0: not constrained
 
 ){
-  require(rjags)
-
   if(trend==-1)
     t <- c(1, 0, 0)
   else if(trend==0)
