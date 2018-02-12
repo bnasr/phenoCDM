@@ -73,7 +73,7 @@ dev.off()
 
 ```
 
-![Figure 1. Simulated data ](fig1.png)
+![Figure 1. Simulated data ](example/fig1.png)
 
 
 
@@ -121,7 +121,7 @@ dev.off()
 
 ```
 
-![Figure 2. Model efficiency](fig2.png)
+![Figure 2. Model efficiency](example/fig2.png)
 
 
 
@@ -152,4 +152,4 @@ dev.off()
 
 ```
 
-![Figure 3. Predictions vs Observed](fig3.png)
+![Figure 3. Predictions vs Observed](example/fig3.png)
