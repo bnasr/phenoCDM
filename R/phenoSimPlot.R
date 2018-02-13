@@ -14,30 +14,19 @@
 #' @import stats
 #' @examples
 #'
-#' #Plot Simulated Phenology Data
-#' ssSim <- phenoSim(nSites = 4, #number of sites
-#'                   nTSet = 20, #number of Time steps
+#' #Simulate Phenology Data
+#' ssSim <- phenoSim(nSites = 2, #number of sites
+#'                   nTSet = 30, #number of time steps
 #'                   beta = c(1, 2), #beta coefficients
 #'                   sig = .01, #process error
-#'                   tau = .2, #observation error
+#'                   tau = .1, #observation error
 #'                   plotFlag = TRUE, #whether plot the data or not
-#'                   miss = 0.1, #fraction of missing data
-#'                   ymax = c(9,5,7, 3) #maximum of saturation trajectory
+#'                   miss = 0.05, #fraction of missing data
+#'                   ymax = c(6, 3) #maximum of saturation trajectory
 #' )
 #'
-#' ssOut <- fitCDM(x = ssSim$x, #predictors
-#'                 nGibbs = 2000,
-#'                 nBurnin = 1000,
-#'                 z = ssSim$z,#response
-#'                 connect = ssSim$connect, #connectivity of time data
-#'                 quiet=TRUE)
-#'
-#' summ <- getGibbsSummary(ssOut, burnin = 1000, sigmaPerSeason = FALSE)
-#'
-#' colMeans(summ$ymax)
-#' colMeans(summ$betas)
-#' colMeans(summ$tau)
-#' colMeans(summ$sigma)
+#' #Plot Simulated Data
+#' phenoSimPlot(ssSim$z, ssSim$connect)
 #'
 phenoSimPlot <- function(z, connect, add=FALSE, col='blue', ylim = range(z, na.rm = TRUE), pch=1, lwd=1){
   if(add) par(new=TRUE)

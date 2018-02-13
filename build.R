@@ -6,8 +6,12 @@ PACKAGE.NAME = 'phenoCDM'
 # create('~/Projects/phenoCDM/')
 document(pkg = '.')
 install(pkg = '.')
-f <- build(pkg = '.')
 
-file.copy(from = f, to = paste0(PACKAGE.NAME, '.tar.gz'), overwrite = T)
-file.remove(f)
-system(command = paste0('R CMD check --as-cran ', PACKAGE.NAME, '.tar.gz'))
+system('mkdir toCRAN')
+system('cp -r R man DESCRIPTION NAMESPACE toCRAN')
+f <- build('toCRAN')
+system('rm -r toCRAN')
+system(command = paste0('R CMD check --as-cran ', basename(f)))
+
+# devtools::revdep_check()
+# devtools::submit_cran()
