@@ -8,7 +8,7 @@ document(pkg = '.')
 install(pkg = '.')
 
 system('mkdir toCRAN')
-system('cp -r R man DESCRIPTION NAMESPACE toCRAN')
+system('cp -r R man DESCRIPTION NAMESPACE LICENSE toCRAN')
 f <- build('toCRAN')
 system('rm -r toCRAN')
 system(command = paste0('R CMD check --as-cran ', basename(f)))

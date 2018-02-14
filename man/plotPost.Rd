@@ -29,13 +29,13 @@ ssSim <- phenoSim(nSites = 2, #number of sites
 )
 
 ssOut <- fitCDM(x = ssSim$x, #predictors
-                nGibbs = 600,
-                nBurnin = 300,
+                nGibbs = 200,
+                nBurnin = 100,
                 z = ssSim$z,#response
                 connect = ssSim$connect, #connectivity of time data
                 quiet=TRUE)
 
-summ <- getGibbsSummary(ssOut, burnin = 500, sigmaPerSeason = FALSE)
+summ <- getGibbsSummary(ssOut, burnin = 100, sigmaPerSeason = FALSE)
 
 colMeans(summ$ymax)
 colMeans(summ$betas)
