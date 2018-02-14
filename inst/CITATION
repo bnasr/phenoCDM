@@ -1,0 +1,24 @@
+year <- sub("-.*", "", meta$Date)
+
+note <- sprintf("R package version %s", meta$Version)
+
+citHeader("To cite phenoCDM in publications, please cite both the paper and the R package:")
+
+citEntry(entry = "Article",
+         author = c("Bijan Seyednasrollah",
+                    "Jennifer J. Swenson",
+                    "Jean-Christophe Domec",
+                    "James S. Clark"),
+         title = "Continuous development model for incremental time-series analysis: applications on leaf phenology",
+         publisher = "Elsevier",
+         journal = "MethodsX",
+         year = year,
+         textVersion = "B. Seyednasrollah et al. Continuous development model for incremental time-series analysis: applications on leaf phenology, MethodsX, 2018.")
+
+
+citEntry(entry = "Manual",
+         author = "Bijan Seyednasrollah",
+         title = "phenoCDM: Continuous Development Models for Incremental Time-Series Analysis",
+         year = 2018,
+         url = "http://doi.org/10.5281/zenodo.1173348",
+         textVersion = "Bijan Seyednasrollah. (2018). bnasr/phenoCDM: Continuous Development Models for Incremental Time-Series Analysis DOI:10.5281/zenodo.1173348 ")

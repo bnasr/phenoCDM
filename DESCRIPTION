@@ -1,7 +1,7 @@
 Package: phenoCDM
 Title: Continuous Development Models for Incremental Time-Series Analysis
-Version: 0.0.1
-Date: 2018-02-13
+Version: 0.0.2
+Date: 2018-02-14
 Authors@R: person("Bijan", "Seyednasrollah", email = "bijan.s.nasr@gmail.com", role = c("aut", "cre"))
 Author: Bijan Seyednasrollah [aut, cre]
 Maintainer: Bijan Seyednasrollah <bijan.s.nasr@gmail.com>
