@@ -20,5 +20,5 @@ citEntry(entry = "Manual",
          author = "Bijan Seyednasrollah",
          title = "phenoCDM: Continuous Development Models for Incremental Time-Series Analysis",
          year = 2018,
-         url = "http://doi.org/10.5281/zenodo.1173348",
-         textVersion = "Bijan Seyednasrollah. (2018). bnasr/phenoCDM: Continuous Development Models for Incremental Time-Series Analysis DOI:10.5281/zenodo.1173348 ")
+         url = "http://doi.org/10.5281/zenodo.1173349",
+         textVersion = "Bijan Seyednasrollah. (2018). bnasr/phenoCDM: Continuous Development Models for Incremental Time-Series Analysis DOI:10.5281/zenodo.1173349")
