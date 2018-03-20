@@ -15,5 +15,6 @@ system(command = paste0('R CMD check --as-cran ', basename(f)))
 
 devtools::check('toCRAN')
 devtools::revdep_check('toCRAN')
+
 # system('rm -r toCRAN')
 # devtools::submit_cran('toCRAN')
