@@ -1,6 +1,6 @@
 Package: phenoCDM
 Title: Continuous Development Models for Incremental Time-Series Analysis
-Version: 0.1.1
+Version: 0.1.2
 Date: 2018-03-20
 Author: Bijan Seyednasrollah, Jennifer Swenson, Jean-Christophe Domec, James S. Clark
 Maintainer: Bijan Seyednasrollah <bijan.s.nasr@gmail.com>

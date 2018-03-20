@@ -19,7 +19,7 @@ citEntry(entry = "Article",
          year = "2018",
          note = "",
          issn = "0034-4257",
-         doi = "https://doi.org/10.1016/j.rse.2018.02.059",
+         doi = "10.1016/j.rse.2018.02.059",
          url = "https://www.sciencedirect.com/science/article/pii/S0034425718300713",
          textVersion = "Bijan Seyednasrollah, Jennifer J. Swenson, Jean-Christophe Domec, James S. Clark, Leaf phenology paradox: Why warming matters most where it is already warm, Remote Sensing of Environment, Volume 209, May 2018, Pages 446-455, ISSN 0034-4257, https://doi.org/10.1016/j.rse.2018.02.059.")
 
