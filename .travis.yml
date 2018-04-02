@@ -1,6 +1,36 @@
 language: r
-cache: packages
-r:
-  - oldrel
-  - release
-  - devel
+sudo: required
+warnings_are_errors: false
+
+# blacklist
+# branches:
+#  except:
+#    - master
+
+# whitelist
+# branches:
+#  only:
+#    - release
+
+before_install:
+  - sudo add-apt-repository ppa:marutter/rrutter -y
+  - sudo apt-get update
+  - sudo apt-get install r-cran-rjags
+
+r_binary_packages:
+  - rjags
+
+# Code coverage
+r_packages:
+  - covr
+  - MixSIAR
+
+## For a CRAN package
+#  - ./travis-tool.sh install_r <package>
+
+#install:
+#  ## For installing all CRAN dependencies using rpack's DESCRIPTION
+#  - ./travis-tool.sh install_deps
+
+after_success:
+- Rscript -e 'library(covr); codecov()'
