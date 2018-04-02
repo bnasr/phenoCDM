@@ -1,17 +1,16 @@
 ## phenoCDM [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1204614.svg)](https://doi.org/10.5281/zenodo.1204614) [![CRAN status](http://www.r-pkg.org/badges/version-last-release/phenoCDM)](https://cran.r-project.org/package=phenoCDM) [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) [![Downloads](http://cranlogs.r-pkg.org/badges/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  
-
 # phenoCDM
 Continuous development models for incremental time-series analysis: applications on leaf phenology
 
 
 
 ## Installation
-The phenoCDM package can be directly installed from the Github source:
+The phenoCDM package can be directly installed from the CRAN:
 
 ```{r, echo=TRUE}
 
-install_github("bnasr/phenoCDM")
+install.packages("phenoCDM")
 
 ```
 
