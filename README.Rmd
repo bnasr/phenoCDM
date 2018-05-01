@@ -51,7 +51,7 @@ Plotting the simulated time-series:
 ww1 <- which(is.na( ssSim$connect[,1]))
 ww2 <- which(is.na( ssSim$connect[,2]))
 
-png('fig1.png', width = 6, height = 3, units = 'in', res = 300)
+png('fig1.png', width = 6, height = 3, units = 'in', res = 100)
 
 par(mfrow = c(1,3), oma = c(4,4,4,3), mar=c(0,1,0,0))
 for(i in 1:length(ww1))  {
@@ -106,7 +106,7 @@ colMeans(summ$sigma)
 Comparing the model fitted parameters agaist true values:
 ```{r, echo=TRUE}
 
-png('fig2.png', width = 8, height = 3, units = 'in', res = 300)
+png('fig2.png', width = 8, height = 3, units = 'in', res = 100)
 par(mfrow = c(1,3), oma = c(1,1,3,1), mar=c(2,2,0,1), font.axis=2)
 
 plotPost(chains = ssOut$chains[,c("beta.1", "beta.2")], trueValues = ssSim$beta)
@@ -134,7 +134,7 @@ o <- ssOut$data$z
 p <- apply(ssOut$rawsamples$y, 1, mean)
 R2 <- cor(na.omit(cbind(o, p)))[1,2]^2
 
-png('fig3.png', width = 5, height = 5, units = 'in', res = 300)
+png('fig3.png', width = 5, height = 5, units = 'in', res = 100)
 par( mar=c(4,4,1,1), font.axis=2)
 plotPOGibbs(o = o , p = zGibbs,
             xlim = c(0,10), ylim=c(0,10),
