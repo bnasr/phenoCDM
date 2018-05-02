@@ -21,9 +21,12 @@ r_packages:
   - rjags
 
 # Code coverage
-r_packages:
-  - covr
+#r_packages:
+#  - covr
 
+r_github_packages:
+  - jimhester/covr
+  
 ## For a CRAN package
 #  - ./travis-tool.sh install_r <package>
 
