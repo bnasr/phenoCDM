@@ -1,4 +1,4 @@
-## phenoCDM [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1204614.svg)](https://doi.org/10.5281/zenodo.1204614) [![CRAN status](http://www.r-pkg.org/badges/version-last-release/phenoCDM)](https://cran.r-project.org/package=phenoCDM) [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) [![Downloads](http://cranlogs.r-pkg.org/badges/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Travis CI](https://travis-ci.org/bnasr/phenoCDM.svg?branch=master)](https://travis-ci.org/bnasr/phenoCDM) [![Coverage status](https://codecov.io/gh/bnasr/phenoCDM/branch/master/graph/badge.svg)](https://codecov.io/github/bnasr/phenoCDM?branch=master) 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1204614.svg)](https://doi.org/10.5281/zenodo.1204614) [![CRAN status](http://www.r-pkg.org/badges/version-last-release/phenoCDM)](https://cran.r-project.org/package=phenoCDM) [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) [![Downloads](http://cranlogs.r-pkg.org/badges/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/phenoCDM?color=brightgreen)](http://www.r-pkg.org/pkg/phenoCDM) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Travis CI](https://travis-ci.org/bnasr/phenoCDM.svg?branch=master)](https://travis-ci.org/bnasr/phenoCDM) [![Coverage status](https://codecov.io/gh/bnasr/phenoCDM/branch/master/graph/badge.svg)](https://codecov.io/github/bnasr/phenoCDM?branch=master) 
 
  
 # phenoCDM
@@ -11,7 +11,7 @@ The phenoCDM package can be directly installed from the CRAN:
 
 ```{r, echo=TRUE}
 
-install.packages("phenoCDM")
+install.packages("phenoCDM", repos = "http://cran.us.r-project.org")
 
 ```
 
@@ -45,13 +45,11 @@ ssSim <- phenoSim(nSites = 3, #number of sites
 
 Plotting the simulated time-series:
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, fig.height=3, fig.width=6}
 
 
 ww1 <- which(is.na( ssSim$connect[,1]))
 ww2 <- which(is.na( ssSim$connect[,2]))
-
-png('fig1.png', width = 6, height = 3, units = 'in', res = 100)
 
 par(mfrow = c(1,3), oma = c(4,4,4,3), mar=c(0,1,0,0))
 for(i in 1:length(ww1))  {
@@ -67,7 +65,6 @@ mtext(text = 'Index', side = 1, line = 2.5, outer = T, font = 2)
 mtext('Simulated time-series data', side = 3, outer = T, line = 1.5, font = 2)
 legend('bottomright', legend = c('z', 'ymax'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
 
-dev.off()
 
 ```
 
@@ -104,9 +101,8 @@ colMeans(summ$sigma)
 
 
 Comparing the model fitted parameters agaist true values:
-```{r, echo=TRUE}
+```{r, echo=TRUE, fig.width = 8, fig.height = 3}
 
-png('fig2.png', width = 8, height = 3, units = 'in', res = 100)
 par(mfrow = c(1,3), oma = c(1,1,3,1), mar=c(2,2,0,1), font.axis=2)
 
 plotPost(chains = ssOut$chains[,c("beta.1", "beta.2")], trueValues = ssSim$beta)
@@ -115,7 +111,6 @@ plotPost(chains = ssOut$chains[,c("sigma", "tau")], trueValues = c(ssSim$sig, ss
 mtext('Posterior distributions of the parameters', side = 3, outer = T, line = 1, font = 2)
 legend('topleft', legend = c('posterior', 'true value'), col = c('black', 'red'), lty = 1, bty = 'n', cex=1.5, lwd =2)
 
-dev.off()
 
 ```
 
@@ -125,7 +120,7 @@ dev.off()
 
 
 Comparing the model fitted parameters agaist true values:
-```{r, echo=TRUE}
+```{r, echo=TRUE, fig.width = 5, fig.height = 5}
 
 
 yGibbs <- ssOut$latentGibbs
@@ -134,7 +129,6 @@ o <- ssOut$data$z
 p <- apply(ssOut$rawsamples$y, 1, mean)
 R2 <- cor(na.omit(cbind(o, p)))[1,2]^2
 
-png('fig3.png', width = 5, height = 5, units = 'in', res = 100)
 par( mar=c(4,4,1,1), font.axis=2)
 plotPOGibbs(o = o , p = zGibbs,
             xlim = c(0,10), ylim=c(0,10),
@@ -145,7 +139,6 @@ legend('topleft', legend = c('mean', '95th percentile', '1:1 line', 'latent stat
        col = c('#fb8072','#80b1d3','black', 'black'),
        bty = 'n', cex=1.5,
        lty = c(NA, 1, 2, NA), lwd =c(NA, 2, 2, 2), pch = c(16, NA, NA, 3))
-dev.off()
 
 
 ```
