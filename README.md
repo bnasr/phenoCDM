@@ -77,7 +77,7 @@ legend('bottomright', legend = c('z', 'ymax'), col = c('black', 'red'), lty = 1,
 
 ```
 
-![Figure 1. Simulated data ](example/fig1.png)
+![Figure 1. Simulated data ](vignettes/fig1.png)
 
 
 
@@ -123,7 +123,7 @@ legend('topleft', legend = c('posterior', 'true value'), col = c('black', 'red')
 
 ```
 
-![Figure 2. Model efficiency](example/fig2.png)
+![Figure 2. Model efficiency](vignettes/fig2.png)
 
 
 
@@ -152,4 +152,4 @@ legend('topleft', legend = c('mean', '95th percentile', '1:1 line', 'latent stat
 
 ```
 
-![Figure 3. Predictions vs Observed](example/fig3.png)
+![Figure 3. Predictions vs Observed](vignettes/fig3.png)
