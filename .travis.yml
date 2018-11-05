@@ -5,14 +5,11 @@ r:
   - devel
 sudo: false
 
-before_install:
-  - sudo add-apt-repository ppa:marutter/rrutter -y
-  - sudo apt-get update
-  - sudo apt-get install r-cran-rjags
+apt_packages:
+- r-cran-rjags
 
 r_packages:
   - covr
-  - rjags
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
